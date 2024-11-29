@@ -1,0 +1,38 @@
+@import url('https://use.fontawesome.com/releases/v6.5.2/css/all.css');
+
+body {
+    overflow: hidden;
+    position: relative;
+}
+
+.star {
+    -webkit-text-stroke: 0.1px var(--color-light-blue);
+    position: absolute;
+    
+    color: var(--color-text);
+    font-size: 24px;
+    animation: anim 5s linear forwards;
+    z-index: -1;
+}
+
+.star::before {
+    content: "\f2dc";
+    font-family: "FontAwesome";
+    text-shadow: 0 0 5px var(--color-text), 0 0 20px var(--color-text), 0 0 50px var(--color-text); 
+}
+
+@keyframes anim {
+    0% {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
