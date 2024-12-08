@@ -16,15 +16,8 @@
 </head>
 
 <body>
-  <div class="settings-star">
-    <div class="star__container">
-      <button class="active" id="white-star"><i class='bx bx-star bx-spin'></i></button>
-      <button id="blue-star"><i class='bx bx-star bx-spin'></i></button>
-      <button id="red-star"><i class='bx bx-star bx-spin'></i></button>
-      <button id="green-star"><i class='bx bx-star bx-spin'></i></button>
-    </div>
-  </div>
   <div class="container-game">
+    
     <div class="star" style="left:50%; top:50%"></div>
     <div class="game-menu">
       <div class="menu-contnent">
@@ -34,6 +27,14 @@
       </div>
 
       <div class="complexity">
+        <div class="settings-star">
+          <div class="star__container">
+            <button class="active" id="white-star"><i class='bx bx-star bx-spin'></i></button>
+            <button id="blue-star"><i class='bx bx-star bx-spin'></i></button>
+            <button id="red-star"><i class='bx bx-star bx-spin'></i></button>
+            <button id="green-star"><i class='bx bx-star bx-spin'></i></button>
+          </div>
+        </div>
         <div class="complexity__title">
           <h3>CHOSE COMPLEXITY</h3>
         </div>
@@ -43,12 +44,13 @@
           <button id="hard-button">HARD</button>
         </div>
       </div>
-      
+
       <div class=controls>
         <a id="start-button" class="start-button">START <i class='bx bxs-caret-right-circle'></i></a>
       </div>
     </div>
-    
+
+
     <section class="body__game">
       <div class="window-time">
         <div class="timer">
@@ -57,135 +59,137 @@
       </div>
       <main class="memory-game">
         <div class="card" data-framework="angular">
-          <img class="front-face" src="images/cards/angular.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Angular" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/angular.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Angular" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="cpp">
-          <img class="front-face" src="images/cards/cpp.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="CPP" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/cpp.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="CPP" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="java">
-          <img class="front-face" src="images/cards/java.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Java" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/java.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Java" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="javascript">
-          <img class="front-face" src="images/cards/javascript.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="JavaScript" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/javascript.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="JavaScript" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="react">
-          <img class="front-face" src="images/cards/react.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="React" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/react.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="React" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="ruby">
-          <img class="front-face" src="images/cards/ruby.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Ruby" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/ruby.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Ruby" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="vue">
-          <img class="front-face" src="images/cards/vue.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Vue" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/vue.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Vue" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="cs">
-          <img class="front-face" src="images/cards/сs.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="CSharp" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/сs.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="CSharp" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="ts">
-          <img class="front-face" src="images/cards/typescript.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="TypeScript" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/typescript.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="TypeScript" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="smiley">
-          <img class="front-face" src="images/cards/smiley.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Smiley" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/smiley.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Smiley" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="angular">
-          <img class="front-face" src="images/cards/angular.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Angular" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/angular.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Angular" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="cpp">
-          <img class="front-face" src="images/cards/cpp.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="CPP" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/cpp.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="CPP" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="java">
-          <img class="front-face" src="images/cards/java.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Java" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/java.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Java" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="javascript">
-          <img class="front-face" src="images/cards/javascript.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="JavaScript" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/javascript.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="JavaScript" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="react">
-          <img class="front-face" src="images/cards/react.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="React" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/react.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="React" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="ruby">
-          <img class="front-face" src="images/cards/ruby.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Ruby" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/ruby.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Ruby" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="vue">
-          <img class="front-face" src="images/cards/vue.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Vue" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/vue.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Vue" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="cs">
-          <img class="front-face" src="images/cards/сs.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="CSharp" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/сs.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="CSharp" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="ts">
-          <img class="front-face" src="images/cards/typescript.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="TypeScript" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card Back" />
+          <img class="front-face" src="images/cards/typescript.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="TypeScript" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card Back" />
         </div>
         <div class="card" data-framework="smiley">
-          <img class="front-face" src="images/cards/smiley.png" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Smiley" />
-          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false" oncontextmenu="return false;"
-            alt="Card ack" />
+          <img class="front-face" src="images/cards/smiley.png" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Smiley" />
+          <img class="back-face" src="images/back-card.avif" loading="lazy" draggable="false"
+            oncontextmenu="return false;" alt="Card ack" />
         </div>
       </main>
-      <div class="modal-inforamtion">
+      <section class="modal-inforamtion">
         <div id="game-over-modal" class="modal hidden">
           <div class="modal__content">
             <h2 id="game-over-message">Time's up! You lost the game.</h2>
             <button id="retry-button" class="modal__button">Restart Game <i class='bx bx-repost'></i></button>
           </div>
         </div>
- 
-    </section>
+
+      </section>
+</section>
+</div>
 
 
     <script src="scripts/main.js"></script>

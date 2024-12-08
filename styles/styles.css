@@ -57,7 +57,7 @@ body {
     align-items: center;
     flex-direction: column;
     height: 100vh;
-    margin: 0 0 0 50px;
+
     gap: 20px;
     opacity: 1;
     transition: opacity 0.5s ease;
@@ -72,7 +72,7 @@ body {
 .game-menu {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    gap: 20px;
     align-items: center;
 }
 
@@ -81,8 +81,8 @@ body {
     align-items: center;
     justify-content: center;;
     flex-direction: column;
-    gap: 50px;
-    padding: 50px 20px 50px 20px;
+    gap: 10px;
+    padding: 20px 20px 20px 20px;
     border: 10px solid var(--color-border);
     border-radius: 30px;
     backdrop-filter: blur(50px);
@@ -91,7 +91,9 @@ body {
 }
 
 .complexity__title {
-    padding: 10px 20px 10px 20px;
+    width: 200px;
+    height: 80px;
+    text-align: center;
     color: var(--color-text);
     background-color: var(--color-black);
     border-radius: 30px;
@@ -101,6 +103,9 @@ body {
 }
 
 .complexity__buttons {
+    align-items: center;
+    width: 200px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -112,6 +117,7 @@ body {
 }
 
 #ease-button {
+    width: 150px;
     font-weight: 600;
     font-size: 20px;
     color: var(--color-text);
@@ -121,6 +127,7 @@ body {
 }
 
 #medium-button {
+    width: 150px;
     font-weight: 600;
     font-size: 20px;
     color: var(--color-text);
@@ -130,6 +137,7 @@ body {
 }
 
 #hard-button {
+    width: 150px;
     font-weight: 600;
     font-size: 20px;
     color: var(--color-text);
@@ -168,11 +176,11 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 56px;
+    font-size: 40px;
     font-weight: bold;
     height: auto;
-    padding: 10px 50px 10px 50px;
-    width: 300px;
+    padding: 0 10px;
+    width: 150px;
     backdrop-filter: blur(50px);
     border: 4px solid var(--color-border);
     border-radius: 20px;
@@ -182,12 +190,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
-    width: 200px;
+    padding: 10px 0;
+    width: 150px;
     background: transparent;
     border: 2px solid var(--color-border);
     color: var(--color-text);
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 600;
     border-radius: 15px;
     transition: all 0.3s ease-in-out;
@@ -236,15 +244,15 @@ body {
 
 .memory-game {    
     display: grid;
-    grid-template-columns: repeat(5, 150px);
-    grid-gap: 20px;
+    grid-template-columns: repeat(5, 120px);
+    grid-gap: 15px;
     margin-top: 10px;
     
 }
 
 .card {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     position: relative;
     transform: scale(1);
     transform-style: preserve-3d;
@@ -331,7 +339,7 @@ body {
     .container-game {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        
         align-items: center;
     }
 
@@ -372,3 +380,4 @@ body {
         height: 70px;
     }
 }
+

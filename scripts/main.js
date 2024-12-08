@@ -50,7 +50,7 @@ document.getElementById("white-star").addEventListener("click", () => {
 
 setInterval(
   () => draw(),
-  40,
+  50,
 );
 
 // Функція запуску таймера
