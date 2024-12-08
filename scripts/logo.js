@@ -1,5 +1,6 @@
 const gradientElement = document.querySelector(".game-title");
 
+
 let step = 0; // Початковий крок анімації
 const gradientSpeed = 0.002; // Швидкість зміни
 let currentColors = [getRandomColor(), getRandomColor()]; // Початкові кольори

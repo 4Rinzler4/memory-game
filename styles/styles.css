@@ -10,10 +10,15 @@
     --color-background: #7700ff;
     --color-button: #ff0000;
     --color-black: #000000;
-    --color-red: #ff0000;
+    --color-black-fade: #0000008a;
     --color-yellow: #ffe600;
-    --color-green: #1f9c00;
+    --color-green: #008000;
+    --color-green-fade: #1f9c0050;
     --color-light-blue: #00ccff;
+    --color-red-fade: #ff00004f;
+    --color-red: #ff0000;
+    --color-blue: #2600ff71;
+    --color-white-fade: #ffffff93;
 }
 
 h1,
@@ -30,28 +35,21 @@ span {
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    gap: 100px;
     margin: 0;
+    padding: 0;
     background-color: rgb(43, 36, 37);
     background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
         url(../images/bg-game.avif) no-repeat center center/cover;
         cursor: url(../icons/cursors/cursor.png), auto;
 }
 
-@media(max-width: 1200px) {
-   .container {
-        display: grid;
-        grid-template-columns: auto;
-    }
-
-    .game-menu {
-        display: flex;
-        gap: 20px;
-    }
+.container-game {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin: 0;
+    width: 100%;
 }
-
 
 .body__game {
     display: flex;
@@ -60,7 +58,7 @@ body {
     flex-direction: column;
     height: 100vh;
     margin: 0 0 0 50px;
-    gap: 100px;
+    gap: 20px;
     opacity: 1;
     transition: opacity 0.5s ease;
 }
@@ -70,6 +68,7 @@ body {
     pointer-events: none;
     transition: opacity 0.5s ease;
 }
+
 .game-menu {
     display: flex;
     flex-direction: column;
@@ -235,7 +234,7 @@ body {
     }
   }
 
-.memory-game {
+.memory-game {    
     display: grid;
     grid-template-columns: repeat(5, 150px);
     grid-gap: 20px;
@@ -288,7 +287,7 @@ body {
     border: 10px solid var(--color-border);
     border-radius: 50px;
     position: absolute;
-    top: 10%;
+    top: 6%;
     left: 40%;
     display: flex;
     flex-direction: column;
@@ -301,7 +300,6 @@ body {
         background-color: var(--color-text);
     }
 }
-
 
 .modal__button {
     gap: 20px;
@@ -327,4 +325,50 @@ body {
     0 0 10px var(--color-border),
     0 0 25px var(--color-border),
     0 0 50px var(--color-border);
+}
+
+@media(max-width: 1350px) {
+    .container-game {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .body__game {
+        margin: 0;
+    }
+    
+    .game-menu {
+        gap: 50px;
+        
+    }
+    .complexity {
+        backdrop-filter: blur(4px);
+    }
+}
+
+@media(max-width: 880px) {
+    .memory-game {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .card {
+        width: 100px;
+        height: 100px;
+    }
+
+    .body__game {
+        justify-content: start;
+    }
+}
+
+@media(max-width: 468px) {
+    .card {
+        width: 70px;
+        height: 70px;
+    }
 }

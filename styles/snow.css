@@ -1,6 +1,6 @@
 @import url('https://use.fontawesome.com/releases/v6.5.2/css/all.css');
 
-body {
+.container-game {
     overflow: hidden;
     position: relative;
 }
@@ -8,11 +8,11 @@ body {
 .star {
     -webkit-text-stroke: 0.1px var(--color-light-blue);
     position: absolute;
-    
     color: var(--color-text);
     font-size: 24px;
     animation: anim 5s linear forwards;
     z-index: -1;
+    height: 10vh;
 }
 
 .star::before {
@@ -35,4 +35,76 @@ body {
     }
 }
 
+.settings-star {
+    width: 100px;
+    height: 300px;
+    position: absolute;
+    align-self: center;
+    background-color: var(--color-black-fade);
+    z-index: 2;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+}
 
+.star__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+@media(max-width: 585px) {
+    .settings-star {
+        position: absolute;
+        width: 300px;
+        height: 40px;
+        left: 1%;
+        top: 13%;
+    }
+
+    .star__container {
+        flex-direction: row;
+    }
+}
+
+#blue-star,
+#red-star,
+#green-star,
+#white-star {
+    font-size: 16px;
+    color: var(--color-text);
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-text);
+    border-radius: 50%;
+    background: none;
+    cursor: url(/icons/cursors/pointer.png), pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+#white-star {
+    background-color: var(--color-white-fade);
+}
+
+#blue-star {
+    background-color: var(--color-blue);
+}
+
+#red-star {
+    background-color: var(--color-red-fade);
+}
+
+#green-star {
+    background-color: var(--color-green-fade);
+}
+
+.active {
+    box-shadow: 0 0 5px var(--color-text),
+    0 0 10px var(--color-text),
+    0 0 20px var(--color-text),
+    0 0 50px var(--color-text),
+    0 0 75px var(--color-text);
+}

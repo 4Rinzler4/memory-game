@@ -1,4 +1,4 @@
-const container = document.querySelector("body");
+const container = document.querySelector('.container-game');
 const timerDisplay = document.getElementById('timer-display');
 const startButton = document.getElementById('start-button');
 const retryButton = document.getElementById('retry-button');
@@ -6,6 +6,10 @@ const gameOverModal = document.getElementById('game-over-modal');
 const gameOverMessage = document.getElementById('game-over-message');
 const cards = document.querySelectorAll('.card');
 const complexityButtons = document.querySelectorAll('.complexity__buttons button');
+const gameMenu = document.querySelector('.game-menu');
+const memoryGame = document.querySelector('.memory-game');
+const windowTime = document.querySelector('.window-time');
+const bodyGame = document.querySelector('.body-game');
 
 let timer; 
 let timeLeft = 60000; // Початковий час
@@ -15,6 +19,7 @@ let lockBoard = false;
 let firstCard, secondCard;
 let pairsFound = 0;
 let gameStarted = false; 
+let activeColor = "var(--color-text)";
 
 function draw() {
   const e = document.createElement("div");
@@ -24,11 +29,24 @@ function draw() {
 
   e.style.fontSize = `${Math.random() * 24}px`;
   e.style.animationDuration = `${2 + Math.random() * 4}s`;
-
+  e.style.color = activeColor;
   setTimeout (
       () => container.removeChild(e), 5000,
   );
 }
+
+document.getElementById("blue-star").addEventListener("click", () => {
+  activeColor = "var(--color-light-blue)";
+});
+document.getElementById("red-star").addEventListener("click", () => {
+  activeColor = "var(--color-red)";
+});
+document.getElementById("green-star").addEventListener("click", () => {
+  activeColor = "var(--color-border)";
+});
+document.getElementById("white-star").addEventListener("click", () => {
+  activeColor = "var(--color-text)";
+});
 
 setInterval(
   () => draw(),
@@ -52,7 +70,7 @@ function startTimer() {
 complexityButtons.forEach((button) => {
   button.addEventListener('click', () => {
     complexity = button.id.split('-')[0]; // "easy", "medium", "hard"
-    if (complexity === 'easy') timeLeft = 60000;
+    if (complexity === 'EASY') timeLeft = 60000;
     if (complexity === 'medium') timeLeft = 45000;
     if (complexity === 'hard') timeLeft = 30000;
     
@@ -131,7 +149,7 @@ function flipCard() {
 function endGame(isWin) {
   clearInterval(timer);
   gameOverModal.classList.remove('hidden');
-
+  gameMenu.classList.remove('hidden');
   if (isWin) {
     gameOverMessage.textContent = 'Congratulations! You won the game!';
   } else {
@@ -165,7 +183,9 @@ startButton.addEventListener('click', () => {
   gameStarted = true;
   startButton.style.pointerEvents = 'none'; 
   startButton.classList.add('hidden');
-
+  gameMenu.classList.add('hidden');
+  memoryGame.classList.remove('hidden');
+  
 });
 
 // Подія для перезапуску гри
