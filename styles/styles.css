@@ -35,6 +35,8 @@ span {
 }
 
 body {
+    -webkit-user-select: none;
+    user-select: none;
     margin: 0;
     padding: 0;
     background-color: rgb(43, 36, 37);
@@ -57,7 +59,6 @@ body {
     align-items: center;
     flex-direction: column;
     height: 100vh;
-
     gap: 20px;
     opacity: 1;
     transition: opacity 0.5s ease;
@@ -73,7 +74,7 @@ body {
     justify-content: center;;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     align-items: center;
 }
 
@@ -82,7 +83,7 @@ body {
     align-items: center;
     justify-content: center;;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     padding: 20px 20px 20px 20px;
     border: 10px solid var(--color-border);
     border-radius: 30px;
@@ -92,9 +93,11 @@ body {
 }
 
 .complexity__title {
+    display: flex;
     width: 200px;
     height: 80px;
     text-align: center;
+    align-items: center;
     color: var(--color-text);
     background-color: var(--color-black);
     border-radius: 30px;
@@ -106,15 +109,20 @@ body {
 .complexity__buttons {
     align-items: center;
     width: 200px;
-    margin-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     button {
-        width: 300px;
+        width: 250px;
         height: 50px;
         border-radius: 30px;
     }
+}
+
+.set-snow {
+    box-shadow: 0 0 5px var(--color-border),
+    0 0 10px var(--color-border),
+    0 0 15px var(--color-text);
 }
 
 #ease-button {
@@ -171,6 +179,48 @@ body {
     cursor: url(../icons/cursors/pointer.png), pointer;
 }
 
+.form-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#name {
+    display: flex;
+    height: 40px;
+    width: 260px;
+    padding: 20px 10px;
+    font-size: 25px;
+    border: 2px solid var(--color-border);
+    border-radius: 10px;
+    text-align: center;
+    background-color: var(--color-black-fade);
+    color: var(--color-text);
+    cursor: url(../icons/cursors/cursor.png), auto;
+}
+
+#submit-button {
+    background-color: var(--color-black-fade);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    font-size: 15px;
+    font-weight: bold;
+    width: 100px;
+    height: 35px;
+    border-radius: 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+#submit-button:hover {
+    background-color: var(--color-text);
+    box-shadow: 0 0 5px var(--color-border),
+    0 0 15px var(--color-border);
+    color: var(--color-black);
+    cursor: url(../icons/cursors/pointer.png), pointer;
+}
+
 .timer {
     color: var(--color-text);
     display: flex;
@@ -180,7 +230,7 @@ body {
     font-size: 40px;
     font-weight: bold;
     height: auto;
-    padding: 0 10px;
+    padding: 5px 20px;
     width: 150px;
     backdrop-filter: blur(50px);
     border: 4px solid var(--color-border);
@@ -206,7 +256,7 @@ body {
 .start-button:hover {
     cursor: url(../icons/cursors/pointer.png), pointer;
     background-color: var(--color-text);
-    color: #222222;
+    color: var(--color-black);
     box-shadow: 0 0 5px var(--color-border),
     0 0 10px var(--color-border),
     0 0 25px var(--color-border),
@@ -231,18 +281,6 @@ body {
     }
 }
 
-@keyframes moveGradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
 .memory-game {    
     display: grid;
     grid-template-columns: repeat(5, 120px);
@@ -252,6 +290,7 @@ body {
 }
 
 .card {
+    border: 7px solid var(--color-black);
     width: 120px;
     height: 120px;
     position: relative;
@@ -292,7 +331,6 @@ body {
 
 .modal__content {
     backdrop-filter: blur(10px);
-    padding: 200px 200px 255px 180px;
     border: 10px solid var(--color-border);
     border-radius: 50px;
     position: absolute;
@@ -327,7 +365,7 @@ body {
 }
 
 .modal__button:hover {
-    cursor: pointer;
+    cursor: url(../icons/cursors/pointer.png), pointer;
     background-color: var(--color-text);
     color: #000000;
     box-shadow: 0 0 5px var(--color-border),
@@ -336,11 +374,99 @@ body {
     0 0 50px var(--color-border);
 }
 
+.music {
+    width: 250px;
+    height: 120px;
+    padding: 20px 20px 20px ;
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid var(--color-border);
+    border-radius: 20px;
+    background-color: var(--color-black-fade);
+    gap: 5px;
+    justify-content: center;
+}
+
+.music__title {
+    color: var(--color-border);
+    font-size: 20px;
+    margin: 0;
+}
+
+.volume {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    background-color: var(--color-black-fade);
+    width: 200px;
+    height: 50px;
+}
+
+#button__on,
+#button__off {
+    width: 50px;
+    height: 30px;
+    font-weight: bold;
+    background-color: var(--color-black);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    transition: all 0.2s ease-in;
+}
+
+#button__on:hover,
+#button__off:hover {
+    background-color: var(--color-text);
+    color: var(--color-black);
+    cursor: url(../icons/cursors/pointer.png), pointer;
+}
+
+#button__on:active,
+#button__off:active {
+    background-color: var(--color-black);
+    color: var(--color-text);
+}
+
+
+.volume-icon {
+    font-size: 30px;
+    cursor: url(../icons/cursors/cursor.png), auto;
+}
+
+#volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 150px;
+    height: 10px;
+    border-radius: 5px; 
+    outline: none; 
+    cursor: url(../icons/cursors/cursor.png), auto;
+}
+
+#volume-slider::-webkit-slider-runnable-track {
+    background: linear-gradient(to right, var(--color-green), var(--color-red-fade));
+    border-radius: 5px;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--color-border);
+    border: 2px solid var(--color-text);
+    border-radius: 50%;
+    cursor: url(../icons/cursors/pointer.png), pointer; 
+}
+
 @media(max-width: 1350px) {
     .container-game {
         display: flex;
         flex-direction: column;
-        
         align-items: center;
     }
 
@@ -349,7 +475,7 @@ body {
     }
     
     .game-menu {
-        gap: 50px;
+        gap: 20px;
         
     }
     .complexity {
@@ -382,3 +508,8 @@ body {
     }
 }
 
+@media(max-width: 1350px) {
+    .body__game {
+        justify-content: start;
+    }
+}

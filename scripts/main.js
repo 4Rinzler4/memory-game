@@ -10,16 +10,36 @@ const gameMenu = document.querySelector('.game-menu');
 const memoryGame = document.querySelector('.memory-game');
 const windowTime = document.querySelector('.window-time');
 const bodyGame = document.querySelector('.body-game');
+const music = document.getElementById('background-music');
+const volumeSlider = document.getElementById("volume-slider");
+
+music.volume = volumeSlider.value;
 
 let timer; 
-let timeLeft = 60000; // Початковий час
-let complexity = 'easy'; // Складність гри
+let timeLeft = 60000; 
+let complexity = 'easy'; 
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 let pairsFound = 0;
 let gameStarted = false; 
 let activeColor = "var(--color-text)";
+
+function togleMusicPlay() {
+  if(music.paused) {
+    music.play();
+  }
+}
+
+function togleMusicPause() {
+  if(music.play) {
+    music.pause();
+  }
+}
+
+volumeSlider.addEventListener("input", (event) => {
+  music.volume = event.target.value;
+});
 
 function draw() {
   const e = document.createElement("div");
@@ -50,14 +70,14 @@ document.getElementById("white-star").addEventListener("click", () => {
 
 setInterval(
   () => draw(),
-  50,
+  40,
 );
 
 // Функція запуску таймера
 function startTimer() {
   timer = setInterval(() => {
     timeLeft -= 1000;
-    timerDisplay.textContent = `Time left: ${timeLeft / 1000}s`;
+    timerDisplay.textContent = `Time: ${timeLeft / 1000}s`;
 
     if (timeLeft <= 0) {
       clearInterval(timer);

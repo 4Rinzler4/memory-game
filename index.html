@@ -16,8 +16,13 @@
 </head>
 
 <body>
+
+  <audio id="background-music" autoplay loop>
+    <source src="audio/silent-night.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="container-game">
-    
+
     <div class="star" style="left:50%; top:50%"></div>
     <div class="game-menu">
       <div class="menu-contnent">
@@ -26,15 +31,29 @@
         </div>
       </div>
 
-      <div class="complexity">
-        <div class="settings-star">
-          <div class="star__container">
-            <button class="active" id="white-star"><i class='bx bx-star bx-spin'></i></button>
-            <button id="blue-star"><i class='bx bx-star bx-spin'></i></button>
-            <button id="red-star"><i class='bx bx-star bx-spin'></i></button>
-            <button id="green-star"><i class='bx bx-star bx-spin'></i></button>
-          </div>
+      <div class="star__container">
+        <button class="active" id="white-star"><i class='bx bx-star bx-spin'></i></button>
+        <button id="blue-star"><i class='bx bx-star bx-spin'></i></button>
+        <button id="red-star"><i class='bx bx-star bx-spin'></i></button>
+        <button id="green-star"><i class='bx bx-star bx-spin'></i></button>
+        <button id="pause-snow"><i class='bx bx-pause'></i></button>
+        <button class="set-snow" id="resume-snow"><i class='bx bxs-right-arrow'></i></button>
+      </div>
+
+      <div class="music">
+        <h3 class="music__title">MUSIC</h3>
+        <div class="music__buttons">
+          <button id="button__on" onclick="togleMusicPlay()">ON</button>
+          <button class="active" id="button__off" onclick="togleMusicPause()">OFF</button>
         </div>
+
+        <div class="volume">
+          <label class="volume-icon" for="volume-slider"><i class='bx bx-volume-full'></i></label>
+          <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="0.1">
+        </div>
+
+      </div>
+      <div class="complexity">
         <div class="complexity__title">
           <h3>CHOSE COMPLEXITY</h3>
         </div>
@@ -43,9 +62,10 @@
           <button id="medium-button">MEDIUM</button>
           <button id="hard-button">HARD</button>
         </div>
-        
+        <div class="form-name">
           <input type="text" id="name" placeholder="Enter Your Name" required />
-           
+          <button id="submit-button">SUBMIT</button>
+        </div>
       </div>
 
       <div class=controls>
@@ -190,13 +210,13 @@
           </div>
         </div>
       </section>
-</section>
-</div>
+    </section>
+  </div>
 
 
-    <script src="scripts/main.js"></script>
-    <script src="scripts/logo.js"></script>
-    <script src="scripts/setsnow.js"></script>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/logo.js"></script>
+  <script src="scripts/setsnow.js"></script>
 
 </body>
 
