@@ -1,3 +1,4 @@
+const body = document.getElementsByTagName('body');
 const container = document.querySelector('.container-game');
 const timerDisplay = document.getElementById('timer-display');
 const startButton = document.getElementById('start-button');
@@ -16,7 +17,7 @@ const volumeSlider = document.getElementById("volume-slider");
 music.volume = volumeSlider.value;
 
 let timer; 
-let timeLeft = 60000; 
+let timeLeft = 90000; 
 let complexity = 'easy'; 
 let hasFlippedCard = false;
 let lockBoard = false;
@@ -89,10 +90,10 @@ function startTimer() {
 // Вибір складності
 complexityButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    complexity = button.id.split('-')[0]; // "easy", "medium", "hard"
-    if (complexity === 'EASY') timeLeft = 60000;
-    if (complexity === 'medium') timeLeft = 45000;
-    if (complexity === 'hard') timeLeft = 30000;
+    complexity = button.id;
+    if (complexity === 'easy-button') timeLeft = 90000;
+    else if (complexity === 'medium-button') timeLeft = 60000;
+    else if (complexity === 'hard-button') timeLeft = 45000;
     
     timerDisplay.textContent = `Time: ${timeLeft / 1000}s`;
   });
