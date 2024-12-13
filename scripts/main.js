@@ -13,11 +13,27 @@ const windowTime = document.querySelector('.window-time');
 const bodyGame = document.querySelector('.body-game');
 const music = document.getElementById('background-music');
 const volumeSlider = document.getElementById("volume-slider");
+const nameInput = document.getElementById('name');
+const submitButton = document.getElementById('submit-button');
+const recordTableBody = document.querySelector('.record__body');
+const welcomeMessage = document.getElementById('welcome-message');
+const resumeSnow = document.getElementById('resume-snow');
+const pauseSnow = document.getElementById('pause-snow');
+const onButton = document.getElementById('button__on');
+const offButton = document.getElementById('button__off');
+const whiteButton = document.getElementById('white-star');
+const blueButton = document.getElementById('blue-star');
+const redButton = document.getElementById('red-star');
+const greenButton = document.getElementById('green-star');
+const menuToggle = document.getElementById('menu-toggle');
+const recordTable = document.getElementById('record-table');
+
+submitButton.disabled = true;
 
 music.volume = volumeSlider.value;
 
 let timer; 
-let timeLeft = 90000; 
+let timeLeft = 2000; 
 let complexity = 'easy'; 
 let hasFlippedCard = false;
 let lockBoard = false;
@@ -25,6 +41,13 @@ let firstCard, secondCard;
 let pairsFound = 0;
 let gameStarted = false; 
 let activeColor = "var(--color-text)";
+let playerName = '';
+let gameTime = 0;
+let rank = 1;
+let drawInterval;
+let isDrawing = true;
+
+welcomeMessage.style.opacity = 0;
 
 function togleMusicPlay() {
   if(music.paused) {
@@ -42,6 +65,61 @@ volumeSlider.addEventListener("input", (event) => {
   music.volume = event.target.value;
 });
 
+menuToggle.addEventListener('click', () => {
+  if (recordTable.style.maxHeight === '0px' || !recordTable.style.maxHeight) {
+    recordTable.style.maxHeight = `${recordTable.scrollHeight}px`;
+    menuToggle.innerHTML = "<i class='bx bxs-down-arrow bx-rotate-180' ></i>";
+  } else {
+    recordTable.style.maxHeight = '0px';
+    menuToggle.innerHTML = "<i class='bx bxs-down-arrow' ></i>";
+  }
+});
+
+nameInput.addEventListener('input', () => {
+  if (nameInput.value.trim() !== '') {
+    submitButton.disabled = false; 
+  } else {
+    submitButton.disabled = true; 
+  }
+  
+});
+
+// Слухач для введення імені
+submitButton.addEventListener('click', () => {
+  playerName = nameInput.value.trim(); // Отримуємо ім'я користувача
+  
+  welcomeMessage.textContent = `Welcome, ${playerName}! Start the game.`;
+  nameInput.disabled = true; // Блокування поля вводу після введення
+  welcomeMessage.style.opacity = 1;
+  startButton.classList.remove("hidden");
+});
+
+// Функція додавання запису до таблиці
+function addRecord(name, time) {
+  // Знаходимо перший порожній рядок у таблиці
+  const emptyRow = Array.from(recordTableBody.querySelectorAll('.record__row')).find((row) => {
+    const cells = row.querySelectorAll('.record__cell');
+    return cells[1].textContent === '' && cells[2].textContent === '';
+  });
+
+  if (emptyRow) {
+    const cells = emptyRow.querySelectorAll('.record__cell');
+    cells[1].textContent = name;
+    cells[2].textContent = time;
+  }
+}
+
+onButton.addEventListener("click", () => {
+  onButton.classList.add("active");
+  offButton.classList.remove("active"); 
+});
+
+offButton.addEventListener("click", () => {
+  onButton.classList.remove("active");
+  offButton.classList.add("active");
+});
+
+
 function draw() {
   const e = document.createElement("div");
   e.classList.add("star");
@@ -58,25 +136,65 @@ function draw() {
 
 document.getElementById("blue-star").addEventListener("click", () => {
   activeColor = "var(--color-light-blue)";
+  whiteButton.classList.remove("active");
+  redButton.classList.remove("active");
+  greenButton.classList.remove("active");
+  blueButton.classList.add("active");
 });
 document.getElementById("red-star").addEventListener("click", () => {
   activeColor = "var(--color-red)";
+  whiteButton.classList.remove("active");
+  blueButton.classList.remove("active");
+  greenButton.classList.remove("active");
+  redButton.classList.add("active");
 });
 document.getElementById("green-star").addEventListener("click", () => {
   activeColor = "var(--color-border)";
+  whiteButton.classList.remove("active");
+  blueButton.classList.remove("active");
+  redButton.classList.remove("active");
+  greenButton.classList.add("active");
 });
 document.getElementById("white-star").addEventListener("click", () => {
   activeColor = "var(--color-text)";
+  blueButton.classList.remove("active");
+  redButton.classList.remove("active");
+  greenButton.classList.remove("active");
+  whiteButton.classList.add("active");
 });
 
-setInterval(
-  () => draw(),
-  40,
-);
+function startDrawing() {
+  if (!isDrawing) {
+    isDrawing = true;
+    drawInterval = setInterval(() => draw(), 40);
+  }
+}
+
+function stopDrawing() {
+  if (isDrawing) {
+    isDrawing = false;
+    clearInterval(drawInterval);
+  }
+}
+
+drawInterval = setInterval(() => draw(), 40);
+
+pauseSnow.addEventListener("click", () => {
+  stopDrawing();
+  pauseSnow.classList.add("set-snow");
+  resumeSnow.classList.remove("set-snow");
+});
+
+resumeSnow.addEventListener("click", () => {
+  startDrawing();
+  pauseSnow.classList.remove("set-snow");
+  resumeSnow.classList.add("set-snow");
+});
 
 // Функція запуску таймера
 function startTimer() {
   timer = setInterval(() => {
+    gameTime += 1000; 
     timeLeft -= 1000;
     timerDisplay.textContent = `Time: ${timeLeft / 1000}s`;
 
@@ -166,19 +284,6 @@ function flipCard() {
   checkForMatch();
 }
 
-// Кінець гри
-function endGame(isWin) {
-  clearInterval(timer);
-  gameOverModal.classList.remove('hidden');
-  gameMenu.classList.remove('hidden');
-  if (isWin) {
-    gameOverMessage.textContent = 'Congratulations! You won the game!';
-  } else {
-    gameOverMessage.textContent = "Time's up! You lost the game.";
-  }
-  gameStarted = false; 
-}
-
 // Перезапуск гри
 function restartGame() {
   gameOverModal.classList.add('hidden');
@@ -205,9 +310,24 @@ startButton.addEventListener('click', () => {
   startButton.style.pointerEvents = 'none'; 
   startButton.classList.add('hidden');
   gameMenu.classList.add('hidden');
-  memoryGame.classList.remove('hidden');
-  
 });
+
+// Кінець гри
+function endGame(isWin) {
+  clearInterval(timer);
+  gameOverModal.classList.remove('hidden');
+
+  if (isWin) {
+    gameOverMessage.textContent = `Congratulations! You won the game in ${gameTime / 1000} seconds!`;
+    if (playerName) {
+      addRecord(playerName, gameTime / 1000);
+    }
+  } else {
+    gameOverMessage.textContent = "Time's up! You lost the game.";
+  }
+  gameStarted = false; 
+  gameMenu.classList.remove('hidden');
+}
 
 // Подія для перезапуску гри
 retryButton.addEventListener('click', () => {

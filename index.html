@@ -19,7 +19,7 @@
   <body>
 
     <audio id="background-music" autoplay loop>
-      <source src="audio/silent-night.mp3" type="audio/mpeg">
+      <!-- <source src="audio/silent-night.mp3" type="audio/mpeg"> -->
     </audio>
 
     <div class="container-game">
@@ -71,7 +71,10 @@
           <div class="form-name">
             <input type="text" id="name" placeholder="Enter Your Name"
               required />
-            <button id="submit-button">SUBMIT</button>
+              <button id="submit-button">SUBMIT</button>
+             <div id="welcome-message">
+              <p></p>
+             </div>
           </div>
         </div>
       </div>
@@ -79,7 +82,7 @@
       <section class="body__game">
         <div class="window-time">
           <div class=controls>
-            <a id="start-button" class="start-button">START <i
+            <a id="start-button" class="start-button hidden" >START <i
                 class='bx bxs-caret-right-circle'></i></a>
           </div>
           <div class="timer">
@@ -258,21 +261,59 @@
           </div>
         </section>
       </section>
-      <div class="list">
-        <div class="list__container">
-          <article class="list__title">Records</article>
-          <div class="list__subtitle">
-            <article class="list__name">Name:</article>
-            <article class="list__time">Time:</article>
-          </div>
+      <div class="record">
+  
+        <button class="record__menu-toggle" id="menu-toggle">
+          <i class='bx bxs-down-arrow' ></i>
+        </button>
+      
+        <!-- Таблиця рекордів -->
+        <div class="record__table-wrapper" id="record-table">
+          <h1 class="record__title">
+            <i class="bx bx-meteor bx-rotate-270"></i> Records <i class="bx bx-meteor"></i>
+          </h1>
+          <table class="record__table">
+            <thead class="record__header">
+              <tr class="record__row">
+                <th class="record__cell record__cell--heading"></th>
+                <th class="record__cell record__cell--heading">Name</th>
+                <th class="record__cell record__cell--heading">Time(s)</th>
+              </tr>
+            </thead>
+            <tbody class="record__body">
+              <tr class="record__row">
+                <td class="record__cell">1</td>
+                <td class="record__cell"></td>
+                <td class="record__cell"></td>
+              </tr>
+              <tr class="record__row">
+                <td class="record__cell">2</td>
+                <td class="record__cell"></td>
+                <td class="record__cell"></td>
+              </tr>
+              <tr class="record__row">
+                <td class="record__cell">3</td>
+                <td class="record__cell"></td>
+                <td class="record__cell"></td>
+              </tr>
+              <tr class="record__row">
+                <td class="record__cell">4</td>
+                <td class="record__cell"></td>
+                <td class="record__cell"></td>
+              </tr>
+              <tr class="record__row">
+                <td class="record__cell">5</td>
+                <td class="record__cell"></td>
+                <td class="record__cell"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
+  </div>
 
     <script src="scripts/main.js"></script>
     <script src="scripts/logo.js"></script>
-    <script src="scripts/setsnow.js"></script>
-
   </body>
 
 </html>
