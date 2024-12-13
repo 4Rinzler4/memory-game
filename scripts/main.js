@@ -318,12 +318,12 @@ function endGame(isWin) {
   gameOverModal.classList.remove('hidden');
 
   if (isWin) {
-    gameOverMessage.textContent = `Congratulations! You won the game in ${gameTime / 1000} seconds!`;
+    gameOverMessage.textContent = `Congratulations! ${playerName}, You won the game in ${gameTime / 1000} seconds!`;
     if (playerName) {
       addRecord(playerName, gameTime / 1000);
     }
   } else {
-    gameOverMessage.textContent = "Time's up! You lost the game.";
+    gameOverMessage.textContent = `Time's up! ${playerName}, You lost the game.`;
   }
   gameStarted = false; 
   gameMenu.classList.remove('hidden');

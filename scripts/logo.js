@@ -1,11 +1,11 @@
 const gradientElement = document.querySelector(".game-title");
 
-
 let step = 0; // Початковий крок анімації
 const gradientSpeed = 0.002; // Швидкість зміни
 let currentColors = [getRandomColor(), getRandomColor()]; // Початкові кольори
 let nextColors = [getRandomColor(), getRandomColor()]; // Наступні кольори
 
+// Функція для генерації випадкових кольорів
 function getRandomColor() {
   const letters = "0123456789ABCDEF";
   let color = "#";
@@ -15,18 +15,18 @@ function getRandomColor() {
   return color;
 }
 
+// Функція для анімації зміни кольорів градієнта
 function animateGradient() {
   const mix = step - Math.floor(step);
 
-  // Розрахунок кольорів
   const blendedColor1 = mixColors(
-    hexToRgba(currentColors[0]),
-    hexToRgba(nextColors[0]),
+    hexToRgba(currentColors[0], 0.4), 
+    hexToRgba(nextColors[0], 0.4), 
     mix
   );
   const blendedColor2 = mixColors(
-    hexToRgba(currentColors[1]),
-    hexToRgba(nextColors[1]),
+    hexToRgba(currentColors[1], 0.4), 
+    hexToRgba(nextColors[1], 0.4), 
     mix
   );
 
@@ -43,11 +43,18 @@ function animateGradient() {
   requestAnimationFrame(animateGradient);
 }
 
-function hexToRgba(hex) {
+// Функція для конвертації кольору з hex в rgba
+function hexToRgba(hex, darkenFactor = 1) {
   const bigint = parseInt(hex.slice(1), 16);
-  const r = (bigint >> 16) & 255;
-  const g = (bigint >> 8) & 255;
-  const b = bigint & 255;
+  let r = (bigint >> 16) & 255;
+  let g = (bigint >> 8) & 255;
+  let b = bigint & 255;
+
+  // Зменшення інтенсивності кольору
+  r = Math.round(r * darkenFactor);
+  g = Math.round(g * darkenFactor);
+  b = Math.round(b * darkenFactor);
+
   return { r, g, b };
 }
 
@@ -58,5 +65,4 @@ function mixColors(color1, color2, weight) {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
-// Запуск анімації
 animateGradient();

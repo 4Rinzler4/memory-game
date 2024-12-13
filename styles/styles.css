@@ -298,8 +298,7 @@ body {
     border: 1px solid var(--color-border);
     border-radius: 20px;
     color: var(--color-text);
-    background: linear-gradient(45deg, var(--color-border), var(--color-background),
-     var(--color-button), var(--color-text));
+    
     animation: moveGradient 6s linear infinite;
     span {
         color: var(--color-border);
