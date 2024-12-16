@@ -40,7 +40,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgb(43, 36, 37);
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
         url(../images/bg-game.avif) no-repeat center center/cover;
         cursor: url(../icons/cursors/cursor.png), auto;
 }
@@ -87,7 +87,7 @@ body {
     padding: 20px 20px 20px 20px;
     border: 10px solid var(--color-border);
     border-radius: 30px;
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(45px);
     box-shadow: 0 0 5px var(--color-border),
     0 0 15px var(--color-border);
 }
@@ -125,7 +125,7 @@ body {
     0 0 15px var(--color-text);
 }
 
-#ease-button {
+#easy-button {
     width: 150px;
     font-weight: 600;
     font-size: 20px;
@@ -155,7 +155,7 @@ body {
     transition: all 0.3s ease;
 }
 
-#ease-button:hover {
+#easy-button:hover{
     color: var(--color-black);
     background-color: var(--color-text);
     box-shadow: 0 0 5px var(--color-green),
@@ -217,7 +217,8 @@ body {
     background-color: var(--color-black-fade);
 }
 
-#submit-button {
+#submit-button,
+#edit-button {
     background-color: var(--color-black-fade);
     color: var(--color-text);
     border: 1px solid var(--color-border);
@@ -229,7 +230,8 @@ body {
     transition: all 0.2s ease-in-out;
 }
 
-#submit-button:hover {
+#submit-button:hover,
+#edit-button:hover {
     background-color: var(--color-text);
     box-shadow: 0 0 5px var(--color-border),
     0 0 15px var(--color-border);
@@ -360,12 +362,14 @@ body {
     position: absolute;
     padding: 50px;
     top: 40%;
-    left: 35%;
+    left: 47%;
     display: flex;
     flex-direction: column;
     align-items: center;
     color: var(--color-text);
     h2 {
+        display: flex;
+        flex-wrap: wrap;
         padding: 10px 10px 10px 10px;
         border-radius: 20px;
         color: var(--color-black);
@@ -504,16 +508,11 @@ body {
     top: 2%
 }
 
-.record__table-wrapper {
-    background-color: var(--color-black);
-    height: 300px;
-}
-
 .record__menu-toggle {
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: var(--color-black);
+    background-color: var(--color-black-fade);
     color: var(--color-light);
     border: 2px solid var(--color-border);
     border-radius: 20px;
@@ -524,12 +523,24 @@ body {
     top: 100%;
     right: 0;
     z-index: 3;
-  }
-
-  .record__menu-toggle  {
     color: var(--color-text);
     font-size: 1.5rem;
+    transition: all 0.2s ease-in-out;
   }
+
+.record__menu-toggle:hover {
+    cursor: url(../icons/cursors/pointer.png), pointer;
+    box-shadow: 0 0 5px var(--color-border),
+    0 0 10px var(--color-border),
+    0 0 15px var(--color-text);
+    background-color: var(--color-text);
+    color: var(--color-black);
+}
+
+.record__menu-toggle:active {
+    color: var(--color-text);
+    background-color: var(--color-black);
+}
 
 .record__title {
     color: var(--color-text);
@@ -538,13 +549,13 @@ body {
     margin: 0;
     font-size: 30px;
     border-bottom: 2px solid var(--color-border);
-    background-color: var(--color-black-fade);
     border-radius: 30px;
 }
 
 .record__table {
     background-color: var(--color-black-fade);
-    width: 330px;
+    width: 350px;
+    height: 265px;
     color: var(--color-text);
     text-align: center;
     border: 5px solid var(--color-border);
@@ -562,32 +573,14 @@ body {
     font-size: 30px;
 }
 
-@media(max-width: 1630px) {
-    .container-game {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
 
-    .body__game {
-        margin: 0;
-    }
-    
-    .game-menu {
-        gap: 20px;
-        
-    }
-    .complexity {
-        backdrop-filter: blur(4px);
-    }
-}
 
-@media(max-width: 880px) {
+@media(max-width: 1200px) {
     .memory-game {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 15px;
+        
     }
 
     .card {
@@ -595,21 +588,34 @@ body {
         height: 100px;
     }
 
-    .body__game {
-        justify-content: start;
+    .container-game {
+        gap: 0;
     }
 }
 
-@media(max-width: 468px) {
+@media(max-width: 565px) {
     .card {
         width: 70px;
         height: 70px;
     }
+
+    .memory-game {
+        max-width: 400px;
+        gap: 15px;
+    }
 }
 
-@media(max-width: 1350px) {
-    .body__game {
-        justify-content: start;
+@media(max-width: 320px) {
+    .memory-game {
+        max-width: 320px;
+        gap: 10px;
+    }
+}
+
+@media(max-width: 383px) {
+    .record {
+        top: 5%;
+        right: 0;
     }
 }
 
@@ -618,6 +624,9 @@ body {
     transition: max-height 0.3s ease-in-out;
     overflow: hidden;
     max-height: 100%; /* Приховане меню */
+    background-color: var(--color-black);
+    height: auto;
+    border-radius: 20px;
   }
   
   /* Сховати таблицю за замовчуванням для маленьких екранів */
@@ -643,7 +652,7 @@ body {
       cursor: pointer;
       font-size: 1rem;
       position: absolute;
-      top: 5%;
+      top: 1%;
       right: 2%;
       z-index: 3;
     }
@@ -654,4 +663,19 @@ body {
       font-size: 1.5rem;
     }
   }
-  
+
+  @media (max-width: 870px) {
+    .container-game {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .memory-game {
+        width: 600px;
+    }
+
+    .body__game {
+        justify-content: start;
+        margin-top: 20px;
+    }
+  }

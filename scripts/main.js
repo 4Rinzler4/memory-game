@@ -27,13 +27,14 @@ const redButton = document.getElementById('red-star');
 const greenButton = document.getElementById('green-star');
 const menuToggle = document.getElementById('menu-toggle');
 const recordTable = document.getElementById('record-table');
+const editButton = document.getElementById('edit-button');
 
 submitButton.disabled = true;
 
 music.volume = volumeSlider.value;
 
-let timer; 
-let timeLeft = 2000; 
+let timer;
+let timeLeft = 2000;
 let complexity = 'easy'; 
 let hasFlippedCard = false;
 let lockBoard = false;
@@ -87,25 +88,61 @@ nameInput.addEventListener('input', () => {
 // Слухач для введення імені
 submitButton.addEventListener('click', () => {
   playerName = nameInput.value.trim(); // Отримуємо ім'я користувача
-  
+  document.createElement('p');
   welcomeMessage.textContent = `Welcome, ${playerName}! Start the game.`;
   nameInput.disabled = true; // Блокування поля вводу після введення
   welcomeMessage.style.opacity = 1;
   startButton.classList.remove("hidden");
+  submitButton.style.opacity = 0;
+  editButton.style.opacity = 1;
+  startButton.disabled = false;
+});
+
+editButton.addEventListener('click', () => {
+  nameInput.disabled = false;
+  submitButton.style.opacity = 1;
+  playerName = nameInput.value.trim();
+  welcomeMessage.textContent = `Welcome, ${playerName}! Start the game.`;
+  editButton.style.opacity = 0;
 });
 
 // Функція додавання запису до таблиці
 function addRecord(name, time) {
-  // Знаходимо перший порожній рядок у таблиці
-  const emptyRow = Array.from(recordTableBody.querySelectorAll('.record__row')).find((row) => {
+  // Знаходимо рядок з тим самим ім'ям
+  const existingRow = Array.from(recordTableBody.querySelectorAll('.record__row')).find((row) => {
     const cells = row.querySelectorAll('.record__cell');
-    return cells[1].textContent === '' && cells[2].textContent === '';
+    return cells[1].textContent === name;
   });
 
-  if (emptyRow) {
-    const cells = emptyRow.querySelectorAll('.record__cell');
-    cells[1].textContent = name;
-    cells[2].textContent = time;
+  if (existingRow) {
+    // Якщо ім'я вже є, оновлюємо тільки значення, які не однакові
+    const cells = existingRow.querySelectorAll('.record__cell');
+    if (cells[2].textContent !== time) {
+      cells[2].textContent = time;
+    }
+  } else {
+    // Знаходимо перший порожній рядок
+    const emptyRow = Array.from(recordTableBody.querySelectorAll('.record__row')).find((row) => {
+      const cells = row.querySelectorAll('.record__cell');
+      return cells[1].textContent === '' && cells[2].textContent === '';
+    });
+
+    if (emptyRow) {
+      // Додаємо нове ім'я і час у порожній рядок
+      const cells = emptyRow.querySelectorAll('.record__cell');
+      cells[1].textContent = name;
+      cells[2].textContent = time;
+    } else {
+      // Якщо порожніх рядків немає, додаємо новий рядок (опціонально)
+      const newRow = document.createElement('tr');
+      newRow.classList.add('record__row');
+      newRow.innerHTML = `
+        <td class="record__cell"></td>
+        <td class="record__cell">${name}</td>
+        <td class="record__cell">${time}</td>
+      `;
+      recordTableBody.appendChild(newRow);
+    }
   }
 }
 
@@ -209,10 +246,10 @@ function startTimer() {
 complexityButtons.forEach((button) => {
   button.addEventListener('click', () => {
     complexity = button.id;
-    if (complexity === 'easy-button') timeLeft = 90000;
+    if (complexity === 'easy-button') timeLeft = 2000;
     else if (complexity === 'medium-button') timeLeft = 60000;
     else if (complexity === 'hard-button') timeLeft = 45000;
-    
+
     timerDisplay.textContent = `Time: ${timeLeft / 1000}s`;
   });
 });
@@ -289,9 +326,8 @@ function restartGame() {
   gameOverModal.classList.add('hidden');
   shuffleCards();
   pairsFound = 0;
-  timeLeft = complexity === 'easy' ? 90000 : complexity === 'medium' ? 45000 : 30000;
+  timeLeft = complexity === 'easy' ? 90000 : complexity === 'medium' ? 45000 : 2000;
   timerDisplay.textContent = `Time: ${timeLeft / 1000}s`;
-
   cards.forEach((card) => {
     card.classList.remove('flip');
     card.addEventListener('click', flipCard);
@@ -316,6 +352,7 @@ startButton.addEventListener('click', () => {
 function endGame(isWin) {
   clearInterval(timer);
   gameOverModal.classList.remove('hidden');
+  gameMenu.classList.remove('hidden');
 
   if (isWin) {
     gameOverMessage.textContent = `Congratulations! ${playerName}, You won the game in ${gameTime / 1000} seconds!`;
@@ -324,15 +361,17 @@ function endGame(isWin) {
     }
   } else {
     gameOverMessage.textContent = `Time's up! ${playerName}, You lost the game.`;
+    addRecord(playerName, "-");
   }
   gameStarted = false; 
-  gameMenu.classList.remove('hidden');
 }
 
 // Подія для перезапуску гри
 retryButton.addEventListener('click', () => {
   restartGame();
-  gameStarted = true; 
+  gameStarted = true;
+  gameMenu.classList.add('hidden');
+  startButton.classList.add('hidden');
 });
 
 // Додавання обробників подій до кожної картки

@@ -19,7 +19,7 @@
   <body>
 
     <audio id="background-music" autoplay loop>
-      <!-- <source src="audio/silent-night.mp3" type="audio/mpeg"> -->
+      <source src="audio/wh.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container-game">
@@ -64,17 +64,18 @@
             <h3>CHOSE COMPLEXITY</h3>
           </div>
           <div class="complexity__buttons">
-            <button id="ease-button">EASY</button>
+            <button id="easy-button">EASY</button>
             <button id="medium-button">MEDIUM</button>
             <button id="hard-button">HARD</button>
           </div>
           <div class="form-name">
             <input type="text" id="name" placeholder="Enter Your Name"
               required />
-              <button id="submit-button">SUBMIT</button>
-             <div id="welcome-message">
-              <p></p>
-             </div>
+              <div class="form__buttons">
+                <button id="submit-button">SUBMIT</button>
+                <button id="edit-button">EDIT NAME</button>
+              </div>
+             <div id="welcome-message"> </div>
           </div>
         </div>
       </div>
@@ -268,7 +269,7 @@
         </button>
       
         <!-- Таблиця рекордів -->
-        <div class="record__table-wrapper" id="record-table">
+        <div class="record__table-wrapper" id="record-table" style="max-height: 0px; overflow: hidden; transition: max-height 0.3s ease;">
           <h1 class="record__title">
             <i class="bx bx-meteor bx-rotate-270"></i> Records <i class="bx bx-meteor"></i>
           </h1>
