@@ -357,7 +357,7 @@ function endGame(isWin) {
   if (isWin) {
     gameOverMessage.textContent = `Congratulations! ${playerName}, You won the game in ${gameTime / 1000} seconds!`;
     if (playerName) {
-      addRecord(playerName, gameTime / 1000);
+      addRecord(playerName, gameTime / 1000 + "sec");
     }
   } else {
     gameOverMessage.textContent = `Time's up! ${playerName}, You lost the game.`;

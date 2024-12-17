@@ -31,7 +31,7 @@ p,
 a,
 li,
 span {
-  font-family: "popins", sans-serif;
+    font-family: "Mountains of Christmas", serif;
 }
 
 body {
@@ -126,6 +126,7 @@ body {
 }
 
 #easy-button {
+    font-family: "Mountains of Christmas", serif;
     width: 150px;
     font-weight: 600;
     font-size: 20px;
@@ -136,6 +137,7 @@ body {
 }
 
 #medium-button {
+    font-family: "Mountains of Christmas", serif;
     width: 150px;
     font-weight: 600;
     font-size: 20px;
@@ -146,6 +148,7 @@ body {
 }
 
 #hard-button {
+    font-family: "Mountains of Christmas", serif;
     width: 150px;
     font-weight: 600;
     font-size: 20px;
@@ -189,20 +192,22 @@ body {
 
 #name {
     display: flex;
+    flex-wrap: wrap;
     height: 40px;
-    width: 260px;
+    width: 233px;
     padding: 20px 10px;
-    font-size: 25px;
+    font-size: 30px;
     border: 2px solid var(--color-border);
     border-radius: 10px;
     text-align: center;
     background-color: var(--color-black-fade);
     color: var(--color-text);
     cursor: url(../icons/cursors/cursor.png), auto;
+    font-family: "Mountains of Christmas", serif;
 }
 
 #welcome-message {
-    font-family: 'popins', sans-serif;
+    font-family: "Mountains of Christmas", serif;
     border: 2px solid var(--color-border);
     max-width: 220px;
     padding: 3px;
@@ -210,7 +215,7 @@ body {
     display: flex;
     text-align: center;
     flex-wrap: wrap;
-    font-size: 19px;
+    font-size: 22px;
     margin: 0;
     color: var(--color-text);
     border-radius: 20px;
@@ -288,11 +293,14 @@ body {
 }
 
 .game-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 250px;
-    height: 70px;
+    height: 75px;
     text-align: center;
     margin-top: 10px;
-    font-size: 17px;
+    font-size: 20px;
     text-shadow: 0 0 5px var(--color-background),
     0 0 15px var(--color-black);
     box-shadow: 0 0 5px var(--color-border),
@@ -369,11 +377,13 @@ body {
     color: var(--color-text);
     h2 {
         display: flex;
+        text-align: center;
         flex-wrap: wrap;
-        padding: 10px 10px 10px 10px;
+        padding: 10px;
+        border: 3px solid var(--color-border);
         border-radius: 20px;
-        color: var(--color-black);
-        background-color: var(--color-text);
+        color: var(--color-text);
+        background-color: var(--color-black);
     }
 }
 
@@ -382,25 +392,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 20px 20px 20px;
+    padding: 20px;
     width: 500px;
     height: 100px;
-    background: transparent;
     background-color: var(--color-black);
+    border: 5px solid var(--color-border);
     border-radius: 20px;
     font-size: 50px;
     color: var(--color-text);
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .modal__button:hover {
     cursor: url(../icons/cursors/pointer.png), pointer;
     background-color: var(--color-text);
-    color: #000000;
+    color: var(--color-black);
     box-shadow: 0 0 5px var(--color-border),
     0 0 10px var(--color-border),
-    0 0 25px var(--color-border),
-    0 0 50px var(--color-border);
+    0 0 25px var(--color-border);
 }
 
 .music {
@@ -421,7 +430,13 @@ body {
 .music__title {
     color: var(--color-border);
     font-size: 20px;
+    font-weight: bold;
     margin: 0;
+    z-index: 1;
+    text-shadow: 0 0 5px var(--color-black),
+    0 0 10px var(--color-black),
+    0 0 20px var(--color-black),
+    0 0 40px var(--color-black);
 }
 
 .volume {
@@ -504,7 +519,7 @@ body {
     flex-direction: column;
     gap: 20px;
     position: absolute;
-    right: 4%;
+    right: 1%;
     top: 2%
 }
 
@@ -520,8 +535,8 @@ body {
     cursor: pointer;
     font-size: 1rem;
     position: absolute;
-    top: 100%;
-    right: 0;
+    top: 102%;
+    right: 2%;
     z-index: 3;
     color: var(--color-text);
     font-size: 1.5rem;
@@ -568,12 +583,12 @@ body {
 }
 
 .record__cell {
-    font-family: 'popins', sans-serif;
+    max-width: 100px;
+    text-wrap: wrap;
+    font-family: "Mountains of Christmas", serif;
     outline: 2px solid var(--color-border);
-    font-size: 30px;
+    font-size: 25px;
 }
-
-
 
 @media(max-width: 1200px) {
     .memory-game {
@@ -591,6 +606,19 @@ body {
     .container-game {
         gap: 0;
     }
+
+    .modal__content {
+        padding: 20px;
+        top: 30%;
+        right: 10%;
+    }
+
+    .modal__button {
+        font-size: 30px;
+        width: 300px;
+        height: 100px;
+    }
+    
 }
 
 @media(max-width: 565px) {
@@ -602,6 +630,10 @@ body {
     .memory-game {
         max-width: 400px;
         gap: 15px;
+    }
+    
+    .window-time {
+        gap: 20px;
     }
 }
 
@@ -616,6 +648,12 @@ body {
     .record {
         top: 5%;
         right: 0;
+    }
+
+    .modal__button {
+        width: 200px;
+        gap: 1px;
+        font-size: 30px;
     }
 }
 
@@ -677,5 +715,11 @@ body {
     .body__game {
         justify-content: start;
         margin-top: 20px;
+    }
+
+    .modal__content {
+        height: auto;
+        top: 64%;
+        left: 12%;
     }
   }
