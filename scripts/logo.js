@@ -20,13 +20,13 @@ function animateGradient() {
   const mix = step - Math.floor(step);
 
   const blendedColor1 = mixColors(
-    hexToRgba(currentColors[0], 0.4), 
-    hexToRgba(nextColors[0], 0.4), 
+    hexToRgba(currentColors[0], 0.4),
+    hexToRgba(nextColors[0], 0.4),
     mix
   );
   const blendedColor2 = mixColors(
-    hexToRgba(currentColors[1], 0.4), 
-    hexToRgba(nextColors[1], 0.4), 
+    hexToRgba(currentColors[1], 0.4),
+    hexToRgba(nextColors[1], 0.4),
     mix
   );
 

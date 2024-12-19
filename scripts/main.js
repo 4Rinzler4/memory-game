@@ -35,12 +35,12 @@ music.volume = volumeSlider.value;
 
 let timer;
 let timeLeft = 2000;
-let complexity = 'easy'; 
+let complexity = 'easy';
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 let pairsFound = 0;
-let gameStarted = false; 
+let gameStarted = false;
 let activeColor = "var(--color-text)";
 let playerName = '';
 let gameTime = 0;
@@ -51,13 +51,13 @@ let isDrawing = true;
 welcomeMessage.style.opacity = 0;
 
 function togleMusicPlay() {
-  if(music.paused) {
+  if (music.paused) {
     music.play();
   }
 }
 
 function togleMusicPause() {
-  if(music.play) {
+  if (music.play) {
     music.pause();
   }
 }
@@ -78,11 +78,11 @@ menuToggle.addEventListener('click', () => {
 
 nameInput.addEventListener('input', () => {
   if (nameInput.value.trim() !== '') {
-    submitButton.disabled = false; 
+    submitButton.disabled = false;
   } else {
-    submitButton.disabled = true; 
+    submitButton.disabled = true;
   }
-  
+
 });
 
 // Слухач для введення імені
@@ -148,7 +148,7 @@ function addRecord(name, time) {
 
 onButton.addEventListener("click", () => {
   onButton.classList.add("active");
-  offButton.classList.remove("active"); 
+  offButton.classList.remove("active");
 });
 
 offButton.addEventListener("click", () => {
@@ -166,8 +166,8 @@ function draw() {
   e.style.fontSize = `${Math.random() * 24}px`;
   e.style.animationDuration = `${2 + Math.random() * 4}s`;
   e.style.color = activeColor;
-  setTimeout (
-      () => container.removeChild(e), 5000,
+  setTimeout(
+    () => container.removeChild(e), 5000,
   );
 }
 
@@ -231,7 +231,7 @@ resumeSnow.addEventListener("click", () => {
 // Функція запуску таймера
 function startTimer() {
   timer = setInterval(() => {
-    gameTime += 1000; 
+    gameTime += 1000;
     timeLeft -= 1000;
     timerDisplay.textContent = `Time: ${timeLeft / 1000}s`;
 
@@ -257,7 +257,7 @@ complexityButtons.forEach((button) => {
 // Перемішування карт
 function shuffleCards() {
   cards.forEach((card) => {
-    let randomPos = Math.floor(Math.random() * 20); 
+    let randomPos = Math.floor(Math.random() * 20);
     card.style.order = randomPos;
   });
 }
@@ -305,7 +305,7 @@ function resetBoard() {
 
 // Перевертання карт
 function flipCard() {
-  if (!gameStarted) return; 
+  if (!gameStarted) return;
   if (lockBoard) return;
   if (this === firstCard) return;
 
@@ -335,7 +335,7 @@ function restartGame() {
 
   resetBoard();
   startTimer();
-  gameStarted = true; 
+  gameStarted = true;
 }
 
 // Події для старту гри
@@ -343,7 +343,7 @@ startButton.addEventListener('click', () => {
   shuffleCards();
   startTimer();
   gameStarted = true;
-  startButton.style.pointerEvents = 'none'; 
+  startButton.style.pointerEvents = 'none';
   startButton.classList.add('hidden');
   gameMenu.classList.add('hidden');
 });
@@ -363,7 +363,7 @@ function endGame(isWin) {
     gameOverMessage.textContent = `Time's up! ${playerName}, You lost the game.`;
     addRecord(playerName, "-");
   }
-  gameStarted = false; 
+  gameStarted = false;
 }
 
 // Подія для перезапуску гри
