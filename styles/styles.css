@@ -35,6 +35,7 @@ span {
 }
 
 body {
+    position: relative;
     -webkit-user-select: none;
     user-select: none;
     margin: 0;
@@ -525,14 +526,10 @@ body {
 
 .record__menu-toggle {
     display: flex;
-    align-items: center;
-    gap: 10px;
     background-color: var(--color-black-fade);
-    color: var(--color-light);
     border: 2px solid var(--color-border);
     border-radius: 20px;
     padding: 10px 15px;
-    cursor: pointer;
     font-size: 1rem;
     position: absolute;
     top: 102%;
@@ -588,6 +585,112 @@ body {
     font-family: "Mountains of Christmas", serif;
     outline: 2px solid var(--color-border);
     font-size: 25px;
+}
+
+.greeting {
+    width: 320px;
+    position: absolute;
+    left: 1%;
+    top: 2%;
+    z-index: 2;
+    h2 {
+        
+        color:  var(--color-text);
+        top: 0;
+        left: 25%;
+        position: absolute;
+        text-align: center;
+    }
+}
+
+.greeting-button {
+    background-color: var(--color-black);
+    color: var(--color-text);
+    border: 2px solid var(--color-button);
+    border-radius: 20px;
+    padding: 10px 12px;
+    font-size: 2rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.greeting-button:hover {
+    cursor: url(../icons/cursors/pointer.png), pointer;
+    color: var(--color-black);
+    background-color: var(--color-text);
+    box-shadow: 0 0 5px var(--color-button),
+    0 0 10px var(--color-button),
+    0 0 15px var(--color-text);
+}
+
+.greeting-button:active {
+    color: var(--color-text);
+    background-color: var(--color-black);
+}
+
+.greeting-message {
+    display: flex;
+    max-height: 200px;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text);
+    position: absolute;
+    font-size: 1.7rem;
+    width: 400px;
+    height: 200px;
+    max-height: 0px;
+    border: 2px solid var(--color-button);
+    border-radius: 20px;
+    background: url(../images/gbg.avif) no-repeat center center/cover;
+    transition: all 0.2s ease-in-out;
+    opacity: 0;
+    z-index: 2;
+}
+
+.greeting-message p {
+    font-family:"Mountains of Christmas", serif;
+    -webkit-text-stroke: 0.3px var(--color-red-fade);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--color-black-fade);
+    border: 1px solid var(--color-red-fade);
+    border-radius: 20px;
+    width: 300px;
+    height: 110px;
+}
+
+.load-message {
+    position: absolute;
+    text-shadow: 0 0 5px var(--color-button);
+    color: var(--color-text);
+    background-color: var(--color-black);
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 900;
+    bottom: 5%;
+    right: 3%;
+}
+
+.load-message:hover {
+    cursor: url(../icons/cursors/pointer.png), pointer;
+    text-shadow: 0 0 10px var(--color-button),
+    0 0 15px var(--color-button),
+    0 0 25px var(--color-button),
+    0 0 50px var(--color-text);
+}
+
+@media(max-width: 400px) {
+    .greeting-message {
+        width: 320px;
+        p {
+            padding: 10px;
+            width: 220px;
+            font-size: 25px;
+        }
+    }
+
 }
 
 @media(max-width: 1200px) {
@@ -655,6 +758,10 @@ body {
         gap: 1px;
         font-size: 30px;
     }
+
+    .greeting {
+        top: 5%;
+    }
 }
 
 /* Базові стилі таблиці */
@@ -704,6 +811,7 @@ body {
 
   @media (max-width: 870px) {
     .container-game {
+        max-width: 100%;
         display: flex;
         flex-direction: column;
     }
@@ -721,5 +829,11 @@ body {
         height: auto;
         top: 64%;
         left: 12%;
+    }
+
+    .greeting {
+        h2 {
+            opacity: 0;
+        }
     }
   }
