@@ -1,34 +1,36 @@
-const body = document.getElementsByTagName('body');
-const container = document.querySelector('.container-game');
-const timerDisplay = document.getElementById('timer-display');
-const startButton = document.getElementById('start-button');
-const retryButton = document.getElementById('retry-button');
-const gameOverModal = document.getElementById('game-over-modal');
-const gameOverMessage = document.getElementById('game-over-message');
-const cards = document.querySelectorAll('.card');
-const complexityButtons = document.querySelectorAll('.complexity__buttons button');
-const gameMenu = document.querySelector('.game-menu');
-const memoryGame = document.querySelector('.memory-game');
-const windowTime = document.querySelector('.window-time');
-const bodyGame = document.querySelector('.body-game');
-const music = document.getElementById('background-music');
+const body = document.getElementsByTagName("body");
+const container = document.querySelector(".container-game");
+const timerDisplay = document.getElementById("timer-display");
+const startButton = document.getElementById("start-button");
+const retryButton = document.getElementById("retry-button");
+const gameOverModal = document.getElementById("game-over-modal");
+const gameOverMessage = document.getElementById("game-over-message");
+const cards = document.querySelectorAll(".card");
+const complexityButtons = document.querySelectorAll(
+  ".complexity__buttons button"
+);
+const gameMenu = document.querySelector(".game-menu");
+const memoryGame = document.querySelector(".memory-game");
+const windowTime = document.querySelector(".window-time");
+const bodyGame = document.querySelector(".body-game");
+const music = document.getElementById("background-music");
 const volumeSlider = document.getElementById("volume-slider");
-const nameInput = document.getElementById('name');
-const submitButton = document.getElementById('submit-button');
-const recordTableBody = document.querySelector('.record__body');
-const welcomeMessage = document.getElementById('welcome-message');
-const resumeSnow = document.getElementById('resume-snow');
-const pauseSnow = document.getElementById('pause-snow');
-const onButton = document.getElementById('button__on');
-const offButton = document.getElementById('button__off');
-const whiteButton = document.getElementById('white-star');
-const blueButton = document.getElementById('blue-star');
-const redButton = document.getElementById('red-star');
-const greenButton = document.getElementById('green-star');
-const menuToggle = document.getElementById('menu-toggle');
-const recordTable = document.getElementById('record-table');
-const editButton = document.getElementById('edit-button');
-const clearButton = document.getElementById('clear-button');
+const nameInput = document.getElementById("name");
+const submitButton = document.getElementById("submit-button");
+const recordTableBody = document.querySelector(".record__body");
+const welcomeMessage = document.getElementById("welcome-message");
+const resumeSnow = document.getElementById("resume-snow");
+const pauseSnow = document.getElementById("pause-snow");
+const onButton = document.getElementById("button__on");
+const offButton = document.getElementById("button__off");
+const whiteButton = document.getElementById("white-star");
+const blueButton = document.getElementById("blue-star");
+const redButton = document.getElementById("red-star");
+const greenButton = document.getElementById("green-star");
+const menuToggle = document.getElementById("menu-toggle");
+const recordTable = document.getElementById("record-table");
+const editButton = document.getElementById("edit-button");
+const clearButton = document.getElementById("clear-button");
 
 submitButton.disabled = true;
 
@@ -36,16 +38,17 @@ music.volume = volumeSlider.value;
 
 let timer;
 let timeLeft = 90000;
-let complexity = 'easy';
+let complexity = "easy";
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 let pairsFound = 0;
 let gameStarted = false;
 let activeColor = "var(--color-text)";
-let playerName = '';
+let playerName = "";
 let gameTime = 0;
 let rank = 1;
+let recordCount = 1;
 let drawInterval;
 let isDrawing = true;
 
@@ -67,27 +70,26 @@ volumeSlider.addEventListener("input", (event) => {
   music.volume = event.target.value;
 });
 
-menuToggle.addEventListener('click', () => {
-  if (recordTable.style.maxHeight === '0px' || !recordTable.style.maxHeight) {
+menuToggle.addEventListener("click", () => {
+  if (recordTable.style.maxHeight === "0px" || !recordTable.style.maxHeight) {
     recordTable.style.maxHeight = `${recordTable.scrollHeight}px`;
     menuToggle.innerHTML = "<i class='bx bxs-down-arrow bx-rotate-180' ></i>";
   } else {
-    recordTable.style.maxHeight = '0px';
+    recordTable.style.maxHeight = "0px";
     menuToggle.innerHTML = "<i class='bx bxs-down-arrow' ></i>";
   }
 });
 
-nameInput.addEventListener('input', () => {
-  if (nameInput.value.trim() !== '') {
+nameInput.addEventListener("input", () => {
+  if (nameInput.value.trim() !== "") {
     submitButton.disabled = false;
   } else {
     submitButton.disabled = true;
   }
-
 });
 
 // Слухач для введення імені
-submitButton.addEventListener('click', () => {
+submitButton.addEventListener("click", () => {
   playerName = nameInput.value.trim();
   if (!playerName) return;
   const loginTime = new Date().toLocaleTimeString();
@@ -101,33 +103,33 @@ submitButton.addEventListener('click', () => {
   startButton.disabled = false;
 });
 
-editButton.addEventListener('click', () => {
+editButton.addEventListener("click", () => {
   nameInput.disabled = false;
-  submitButton.classList.remove('hidden');
-  editButton.classList.add("hidden")
+  submitButton.classList.remove("hidden");
+  editButton.classList.add("hidden");
   playerName = nameInput.value.trim();
   welcomeMessage.textContent = `Welcome, ${playerName}! Start the game.`;
 });
 
 // Функція для оновлення LocalStorage
 function updateLocalStorage() {
-  const rows = Array.from(recordTableBody.querySelectorAll('.record__row'));
-  const data = rows.map(row => {
-    const cells = row.querySelectorAll('.record__cell');
+  const rows = Array.from(recordTableBody.querySelectorAll(".record__row"));
+  const data = rows.map((row) => {
+    const cells = row.querySelectorAll(".record__cell");
     return {
       name: cells[1].textContent,
       time: cells[2].textContent,
     };
   });
-  localStorage.setItem('records', JSON.stringify(data)); // Зберігаємо у LocalStorage
+  localStorage.setItem("records", JSON.stringify(data)); // Зберігаємо у LocalStorage
 }
 
 // Функція для завантаження даних з LocalStorage
 function loadFromLocalStorage() {
-  const savedData = localStorage.getItem('records');
+  const savedData = localStorage.getItem("records");
   if (savedData) {
     const data = JSON.parse(savedData);
-    data.forEach(record => {
+    data.forEach((record) => {
       addRecord(record.name, record.time);
     });
   }
@@ -136,51 +138,54 @@ function loadFromLocalStorage() {
 // Функція для додавання або оновлення рядка в таблиці
 function addRecord(name, time) {
   // Знаходимо рядок з тим самим ім'ям
-  const existingRow = Array.from(recordTableBody.querySelectorAll('.record__row')).find((row) => {
-    const cells = row.querySelectorAll('.record__cell');
+  const existingRow = Array.from(
+    recordTableBody.querySelectorAll(".record__row")
+  ).find((row) => {
+    const cells = row.querySelectorAll(".record__cell");
     return cells[1].textContent === name;
   });
 
   if (existingRow) {
     // Якщо ім'я вже є, оновлюємо тільки значення, які не однакові
-    const cells = existingRow.querySelectorAll('.record__cell');
+    const cells = existingRow.querySelectorAll(".record__cell");
     if (cells[2].textContent !== time) {
       cells[2].textContent = time;
     }
   } else {
     // Знаходимо перший порожній рядок
-    const emptyRow = Array.from(recordTableBody.querySelectorAll('.record__row')).find((row) => {
-      const cells = row.querySelectorAll('.record__cell');
-      return cells[1].textContent === '' && cells[2].textContent === '';
+    const emptyRow = Array.from(
+      recordTableBody.querySelectorAll(".record__row")
+    ).find((row) => {
+      const cells = row.querySelectorAll(".record__cell");
+      return cells[1].textContent === "" && cells[2].textContent === "";
     });
 
     if (emptyRow) {
       // Додаємо нове ім'я і час у порожній рядок
-      const cells = emptyRow.querySelectorAll('.record__cell');
+      const cells = emptyRow.querySelectorAll(".record__cell");
       cells[1].textContent = name;
       cells[2].textContent = time;
     } else {
       // Якщо порожніх рядків немає, додаємо новий рядок (опціонально)
-      const newRow = document.createElement('tr');
-      newRow.classList.add('record__row');
+      const newRow = document.createElement("tr");
+      newRow.classList.add("record__row");
       newRow.innerHTML = `
-        <td class="record__cell"></td>
+        <td class="record__cell">${recordCount}</td>
         <td class="record__cell">${name}</td>
         <td class="record__cell">${time}</td>
       `;
       recordTableBody.appendChild(newRow);
     }
   }
-
+  recordCount++;
   updateLocalStorage(); // Оновлюємо LocalStorage після кожної зміни
 }
 
 // Завантажуємо дані з LocalStorage при завантаженні сторінки
 loadFromLocalStorage();
 
-
 function clearLocalStorage() {
-  localStorage.removeItem('records'); 
+  localStorage.removeItem("records");
   recordTableBody.innerHTML = `<tbody class="record__body">
               <tr class="record__row">
                 <td class="record__cell">1</td>
@@ -207,10 +212,10 @@ function clearLocalStorage() {
                 <td class="record__cell"></td>
                 <td class="record__cell"></td>
               </tr>
-            </tbody>`; 
+            </tbody>`;
 }
 
-clearButton.addEventListener('click', () => {
+clearButton.addEventListener("click", () => {
   clearLocalStorage();
 });
 
@@ -224,7 +229,6 @@ offButton.addEventListener("click", () => {
   offButton.classList.add("active");
 });
 
-
 function draw() {
   const e = document.createElement("div");
   e.classList.add("star");
@@ -234,9 +238,7 @@ function draw() {
   e.style.fontSize = `${Math.random() * 24}px`;
   e.style.animationDuration = `${2 + Math.random() * 4}s`;
   e.style.color = activeColor;
-  setTimeout(
-    () => container.removeChild(e), 5000,
-  );
+  setTimeout(() => container.removeChild(e), 5000);
 }
 
 document.getElementById("blue-star").addEventListener("click", () => {
@@ -312,11 +314,11 @@ function startTimer() {
 
 // Вибір складності
 complexityButtons.forEach((button) => {
-  button.addEventListener('click', () => {
+  button.addEventListener("click", () => {
     complexity = button.id;
-    if (complexity === 'easy-button') timeLeft = 90000;
-    else if (complexity === 'medium-button') timeLeft = 60000;
-    else if (complexity === 'hard-button') timeLeft = 45000;
+    if (complexity === "easy-button") timeLeft = 1000;
+    else if (complexity === "medium-button") timeLeft = 60000;
+    else if (complexity === "hard-button") timeLeft = 45000;
 
     timerDisplay.textContent = `Time: ${timeLeft / 1000}s`;
   });
@@ -347,8 +349,8 @@ function checkForMatch() {
 
 // Блокування карт після збігу
 function disableCards() {
-  firstCard.removeEventListener('click', flipCard);
-  secondCard.removeEventListener('click', flipCard);
+  firstCard.removeEventListener("click", flipCard);
+  secondCard.removeEventListener("click", flipCard);
 
   resetBoard();
 }
@@ -358,8 +360,8 @@ function unflipCards() {
   lockBoard = true;
 
   setTimeout(() => {
-    firstCard.classList.remove('flip');
-    secondCard.classList.remove('flip');
+    firstCard.classList.remove("flip");
+    secondCard.classList.remove("flip");
 
     resetBoard();
   }, 750);
@@ -377,7 +379,7 @@ function flipCard() {
   if (lockBoard) return;
   if (this === firstCard) return;
 
-  this.classList.add('flip');
+  this.classList.add("flip");
 
   if (!hasFlippedCard) {
     hasFlippedCard = true;
@@ -391,14 +393,15 @@ function flipCard() {
 
 // Перезапуск гри
 function restartGame() {
-  gameOverModal.classList.add('hidden');
+  gameOverModal.classList.add("hidden");
   shuffleCards();
   pairsFound = 0;
-  timeLeft = complexity === 'easy' ? 90000 : complexity === 'medium' ? 45000 : 30000;
+  timeLeft =
+    complexity === "easy" ? 30000 : complexity === "medium" ? 45000 : 1000;
   timerDisplay.textContent = `Time: ${timeLeft / 1000}s`;
   cards.forEach((card) => {
-    card.classList.remove('flip');
-    card.addEventListener('click', flipCard);
+    card.classList.remove("flip");
+    card.addEventListener("click", flipCard);
   });
 
   resetBoard();
@@ -407,23 +410,25 @@ function restartGame() {
 }
 
 // Події для старту гри
-startButton.addEventListener('click', () => {
+startButton.addEventListener("click", () => {
   shuffleCards();
   startTimer();
   gameStarted = true;
-  startButton.style.pointerEvents = 'none';
-  startButton.classList.add('hidden');
-  gameMenu.classList.add('hidden');
+  startButton.style.pointerEvents = "none";
+  startButton.classList.add("hidden");
+  gameMenu.classList.add("hidden");
 });
 
 // Кінець гри
 function endGame(isWin) {
   clearInterval(timer);
-  gameOverModal.classList.remove('hidden');
-  gameMenu.classList.remove('hidden');
+  gameOverModal.classList.remove("hidden");
+  gameMenu.classList.remove("hidden");
 
   if (isWin) {
-    gameOverMessage.textContent = `Congratulations! ${playerName}, You won the game in ${gameTime / 1000} seconds!`;
+    gameOverMessage.textContent = `Congratulations! ${playerName}, You won the game in ${
+      gameTime / 1000
+    } seconds!`;
     if (playerName) {
       addRecord(playerName, gameTime / 1000 + "sec");
     }
@@ -435,12 +440,12 @@ function endGame(isWin) {
 }
 
 // Подія для перезапуску гри
-retryButton.addEventListener('click', () => {
+retryButton.addEventListener("click", () => {
   restartGame();
   gameStarted = true;
-  gameMenu.classList.add('hidden');
-  startButton.classList.add('hidden');
+  gameMenu.classList.add("hidden");
+  startButton.classList.add("hidden");
 });
 
 // Додавання обробників подій до кожної картки
-cards.forEach((card) => card.addEventListener('click', flipCard));
+cards.forEach((card) => card.addEventListener("click", flipCard));

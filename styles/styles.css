@@ -576,7 +576,7 @@ body {
 .record__table {
     background-color: var(--color-black-fade);
     width: 350px;
-    height: 265px;
+    height: auto;
     color: var(--color-text);
     text-align: center;
     border: 5px solid var(--color-border);
