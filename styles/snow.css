@@ -74,7 +74,7 @@
     border: 2px solid var(--color-text);
     border-radius: 50%;
     background: none;
-    cursor: url(/icons/cursors/pointer.png), pointer;
+    cursor: url(../icons/cursors/pointer.png), pointer;
     transition: all 0.5s ease-in-out;
 }
 
