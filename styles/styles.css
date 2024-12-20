@@ -509,6 +509,28 @@ body {
     top: 2%;
 }
 
+.clear-button {
+    font-family: "Mountains of Christmas", serif;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 3px;
+    padding: 7px;
+    height: 35px;
+    background-color: var(--color-black);
+    color: var(--color-text);
+    border: 2px solid var(--color-border);
+    border-radius: 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+.clear-button:hover {
+    background-color: var(--color-text);
+    color: var(--color-black);
+    cursor: url(../icons/cursors/pointer.png), pointer;
+    box-shadow: 0 0 5px var(--color-border),
+    0 0 10px var(--color-border);
+}
+
 .record__menu-toggle {
     display: flex;
     background-color: var(--color-black-fade);
@@ -539,9 +561,12 @@ body {
 }
 
 .record__title {
+    display: flex;
+    justify-content: space-around;
     color: var(--color-text);
     text-align: center;
     width: 350px;
+    height: 45px;
     margin: 0;
     font-size: 30px;
     border-bottom: 2px solid var(--color-border);
@@ -565,6 +590,8 @@ body {
 
 .record__cell {
     max-width: 100px;
+    height: 50px;
+    max-height: 50px;
     text-wrap: wrap;
     font-family: "Mountains of Christmas", serif;
     outline: 2px solid var(--color-border);
@@ -752,42 +779,10 @@ body {
     background-color: var(--color-black);
     height: auto;
     border-radius: 20px;
+    z-index: 3;
 }
 
 /* Сховати таблицю за замовчуванням для маленьких екранів */
-@media (max-width: 1650px) {
-    .record__table-wrapper {
-        max-height: 0;
-        position: absolute;
-        top: 10%;
-        right: 4%;
-        z-index: 2;
-    }
-
-    /* Кнопка бургер-меню */
-    .record__menu-toggle {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background-color: var(--color-black);
-        color: var(--color-light);
-        border: 2px solid var(--color-border);
-        border-radius: 20px;
-        padding: 10px 15px;
-        cursor: pointer;
-        font-size: 1rem;
-        position: absolute;
-        top: 1%;
-        right: 2%;
-        z-index: 3;
-    }
-
-    /* Іконка для бургер-меню */
-    .record__menu-toggle {
-        color: var(--color-text);
-        font-size: 1.5rem;
-    }
-}
 
 @media (max-width: 870px) {
     .container-game {

@@ -28,6 +28,7 @@ const greenButton = document.getElementById('green-star');
 const menuToggle = document.getElementById('menu-toggle');
 const recordTable = document.getElementById('record-table');
 const editButton = document.getElementById('edit-button');
+const clearButton = document.getElementById('clear-button');
 
 submitButton.disabled = true;
 
@@ -87,26 +88,52 @@ nameInput.addEventListener('input', () => {
 
 // Слухач для введення імені
 submitButton.addEventListener('click', () => {
-  playerName = nameInput.value.trim(); // Отримуємо ім'я користувача
-  document.createElement('p');
+  playerName = nameInput.value.trim();
+  if (!playerName) return;
+  const loginTime = new Date().toLocaleTimeString();
+  console.log(`Користувач ${playerName} зайшов о ${loginTime}`);
   welcomeMessage.textContent = `Welcome, ${playerName}! Start the game.`;
-  nameInput.disabled = true; // Блокування поля вводу після введення
+  nameInput.disabled = true;
   welcomeMessage.style.opacity = 1;
   startButton.classList.remove("hidden");
-  submitButton.style.opacity = 0;
-  editButton.style.opacity = 1;
+  submitButton.classList.add("hidden");
+  editButton.classList.remove("hidden");
   startButton.disabled = false;
 });
 
 editButton.addEventListener('click', () => {
   nameInput.disabled = false;
-  submitButton.style.opacity = 1;
+  submitButton.classList.remove('hidden');
+  editButton.classList.add("hidden")
   playerName = nameInput.value.trim();
   welcomeMessage.textContent = `Welcome, ${playerName}! Start the game.`;
-  editButton.style.opacity = 0;
 });
 
-// Функція додавання запису до таблиці
+// Функція для оновлення LocalStorage
+function updateLocalStorage() {
+  const rows = Array.from(recordTableBody.querySelectorAll('.record__row'));
+  const data = rows.map(row => {
+    const cells = row.querySelectorAll('.record__cell');
+    return {
+      name: cells[1].textContent,
+      time: cells[2].textContent,
+    };
+  });
+  localStorage.setItem('records', JSON.stringify(data)); // Зберігаємо у LocalStorage
+}
+
+// Функція для завантаження даних з LocalStorage
+function loadFromLocalStorage() {
+  const savedData = localStorage.getItem('records');
+  if (savedData) {
+    const data = JSON.parse(savedData);
+    data.forEach(record => {
+      addRecord(record.name, record.time);
+    });
+  }
+}
+
+// Функція для додавання або оновлення рядка в таблиці
 function addRecord(name, time) {
   // Знаходимо рядок з тим самим ім'ям
   const existingRow = Array.from(recordTableBody.querySelectorAll('.record__row')).find((row) => {
@@ -144,7 +171,48 @@ function addRecord(name, time) {
       recordTableBody.appendChild(newRow);
     }
   }
+
+  updateLocalStorage(); // Оновлюємо LocalStorage після кожної зміни
 }
+
+// Завантажуємо дані з LocalStorage при завантаженні сторінки
+loadFromLocalStorage();
+
+
+function clearLocalStorage() {
+  localStorage.removeItem('records'); 
+  recordTableBody.innerHTML = `<tbody class="record__body">
+              <tr class="record__row">
+                <td class="record__cell">1</td>
+                <td class="record__cell"></td>
+                <td class="record__cell"></td>
+              </tr>
+              <tr class="record__row">
+                <td class="record__cell">2</td>
+                <td class="record__cell"></td>
+                <td class="record__cell"></td>
+              </tr>
+              <tr class="record__row">
+                <td class="record__cell">3</td>
+                <td class="record__cell"></td>
+                <td class="record__cell"></td>
+              </tr>
+              <tr class="record__row">
+                <td class="record__cell">4</td>
+                <td class="record__cell"></td>
+                <td class="record__cell"></td>
+              </tr>
+              <tr class="record__row">
+                <td class="record__cell">5</td>
+                <td class="record__cell"></td>
+                <td class="record__cell"></td>
+              </tr>
+            </tbody>`; 
+}
+
+clearButton.addEventListener('click', () => {
+  clearLocalStorage();
+});
 
 onButton.addEventListener("click", () => {
   onButton.classList.add("active");
@@ -246,7 +314,7 @@ function startTimer() {
 complexityButtons.forEach((button) => {
   button.addEventListener('click', () => {
     complexity = button.id;
-    if (complexity === 'easy-button') timeLeft = 2000;
+    if (complexity === 'easy-button') timeLeft = 90000;
     else if (complexity === 'medium-button') timeLeft = 60000;
     else if (complexity === 'hard-button') timeLeft = 45000;
 
@@ -326,7 +394,7 @@ function restartGame() {
   gameOverModal.classList.add('hidden');
   shuffleCards();
   pairsFound = 0;
-  timeLeft = complexity === 'easy' ? 90000 : complexity === 'medium' ? 45000 : 2000;
+  timeLeft = complexity === 'easy' ? 90000 : complexity === 'medium' ? 45000 : 30000;
   timerDisplay.textContent = `Time: ${timeLeft / 1000}s`;
   cards.forEach((card) => {
     card.classList.remove('flip');
