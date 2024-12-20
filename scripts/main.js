@@ -35,7 +35,7 @@ submitButton.disabled = true;
 music.volume = volumeSlider.value;
 
 let timer;
-let timeLeft = 2000;
+let timeLeft = 90000;
 let complexity = 'easy';
 let hasFlippedCard = false;
 let lockBoard = false;
