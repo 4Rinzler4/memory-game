@@ -316,7 +316,7 @@ function startTimer() {
 complexityButtons.forEach((button) => {
   button.addEventListener("click", () => {
     complexity = button.id;
-    if (complexity === "easy-button") timeLeft = 1000;
+    if (complexity === "easy-button") timeLeft = 90000;
     else if (complexity === "medium-button") timeLeft = 60000;
     else if (complexity === "hard-button") timeLeft = 45000;
 
@@ -397,7 +397,7 @@ function restartGame() {
   shuffleCards();
   pairsFound = 0;
   timeLeft =
-    complexity === "easy" ? 30000 : complexity === "medium" ? 45000 : 1000;
+    complexity === "easy" ? 30000 : complexity === "medium" ? 45000 : 90000;
   timerDisplay.textContent = `Time: ${timeLeft / 1000}s`;
   cards.forEach((card) => {
     card.classList.remove("flip");
