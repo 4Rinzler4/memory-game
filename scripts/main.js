@@ -137,19 +137,21 @@ function loadFromLocalStorage() {
 
 // Функція для додавання або оновлення рядка в таблиці
 function addRecord(name, time) {
+  const newTime = parseFloat(time);
+
   // Знаходимо рядок з тим самим ім'ям
   const existingRow = Array.from(
     recordTableBody.querySelectorAll(".record__row")
-  ).find((row) => {
-    const cells = row.querySelectorAll(".record__cell");
-    return cells[1].textContent === name;
-  });
+  ).find(
+    (row) => row.querySelectorAll(".record__cell")[1].textContent === name
+  );
 
   if (existingRow) {
     // Якщо ім'я вже є, оновлюємо тільки значення, які не однакові
     const cells = existingRow.querySelectorAll(".record__cell");
-    if (cells[2].textContent !== time) {
-      cells[2].textContent = time;
+    if (!isNaN(newTime) && (isNaN(prevTime) || newTime < prevTime)) {
+      cells[2].textContent = newTime.toFixed(2); // Форматуємо до 2 знаків після коми
+      if (updateLS) updateLocalStorage(); // Оновлюємо LocalStorage
     }
   } else {
     // Знаходимо перший порожній рядок
