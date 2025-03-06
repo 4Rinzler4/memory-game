@@ -427,19 +427,21 @@ function endGame(isWin) {
   gameOverModal.classList.remove("hidden");
   gameMenu.classList.remove("hidden");
 
+  const finalTime = (gameTime / 1000); // Переконуємось, що це число з 2 знаками після коми
+
   if (isWin) {
-    gameOverMessage.textContent = `Congratulations! ${playerName}, You won the game in ${
-      gameTime / 1000
-    } seconds!`;
+    gameOverMessage.textContent = `Congratulations! ${playerName}, You won the game in ${finalTime} seconds!`;
     if (playerName) {
-      addRecord(playerName, gameTime / 1000 + "sec");
+      addRecord(playerName, finalTime);
     }
   } else {
     gameOverMessage.textContent = `Time's up! ${playerName}, You lost the game.`;
     addRecord(playerName, "-");
   }
+
   gameStarted = false;
 }
+
 
 // Подія для перезапуску гри
 retryButton.addEventListener("click", () => {
